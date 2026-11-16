@@ -591,7 +591,9 @@ function mdHtml(src, blank) {
   const out = [];
   let para = [];
   const inl = x => mdInline(x, blank);
-  const flush = () => { if (para.length) { out.push("<p>" + para.map(inl).join("<br>") + "</p>"); para = []; } };
+  // 제목 줄(문단이 통째로 굵은 줄)은 구조를 보여줘야 하므로 빈칸 처리에서 제외한다
+  const paraLine = ln => (blank && /^\s*\*\*[^*]+\*\*\s*$/.test(ln)) ? "<b>" + esc(ln.trim().slice(2, -2)) + "</b>" : inl(ln);
+  const flush = () => { if (para.length) { out.push("<p>" + para.map(paraLine).join("<br>") + "</p>"); para = []; } };
   let i = 0;
   while (i < lines.length) {
     const ln = lines[i];
