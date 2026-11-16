@@ -93,9 +93,9 @@
   .md-body ul, .md-body ol { margin: 6px 0 8px; padding-left: 20px; }
   .md-body li { margin: 3px 0; }
   .md-body blockquote { margin: 8px 0; padding: 8px 12px; background: #eef2f9; border-left: 3px solid #aeb8cf; border-radius: 8px; color: #37415a; font-size: 13px; }
-  .md-body table, .essay-ans table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12.5px; }
-  .md-body th, .md-body td, .essay-ans th, .essay-ans td { border: 1px solid var(--border); padding: 6px 8px; text-align: left; vertical-align: top; }
-  .md-body th, .essay-ans th { background: #eef2f9; font-weight: 700; }
+  .md-body table, .essay-ans table, .exam-ans table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12.5px; }
+  .md-body th, .md-body td, .essay-ans th, .essay-ans td, .exam-ans th, .exam-ans td { border: 1px solid var(--border); padding: 6px 8px; text-align: left; vertical-align: top; }
+  .md-body th, .essay-ans th, .exam-ans th { background: #eef2f9; font-weight: 700; }
   .essay-ans { display: none; margin: 12px 0 0; padding: 14px; border-radius: 12px; background: #f7f9fd; border: 1px solid var(--border); border-left: 4px solid var(--ok); font-size: 13.5px; }
   .essay-ans.show { display: block; }
   .essay-ans h5 { margin: 4px 0 10px; font-size: 13px; color: var(--ok); letter-spacing: -0.2px; }
@@ -109,8 +109,61 @@
   .essay-count { font-size: 12.5px; color: var(--sub); font-weight: 700; }
   @media (max-width: 600px) {
     .btn-done, .btn-star2 { flex: 1 1 46%; justify-content: center; font-size: 13.5px; }
-    .md-body table, .essay-ans table { font-size: 12px; }
-    .md-body th, .md-body td, .essay-ans th, .essay-ans td { padding: 5px 6px; }
+    .md-body table, .essay-ans table, .exam-ans table { font-size: 12px; }
+    .md-body th, .md-body td, .essay-ans th, .essay-ans td, .exam-ans th, .exam-ans td { padding: 5px 6px; }
+  }
+
+  /* ===== 🔲 빈칸 암기 모드 ===== */
+  .blank-toggle { min-height: 40px; padding: 8px 13px; border-radius: 10px; border: 1px solid var(--border); background: #fff; color: var(--sub); font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .blank-toggle.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .blank-chip { display: inline-block; border: 1px dashed #9aa6bf; background: #eef2f9; color: #4a5568; font: inherit; font-size: 0.95em; font-weight: 700; padding: 0 4px; margin: 0 1px; border-radius: 6px; cursor: pointer; line-height: 1.5; vertical-align: baseline; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .blank-chip::before { content: "["; opacity: .5; margin-right: 2px; }
+  .blank-chip::after { content: "]"; opacity: .5; margin-left: 2px; }
+  .blank-chip.open { background: var(--ok-bg); border-style: solid; border-color: var(--ok); color: var(--ok); }
+  .blank-chip.open::before, .blank-chip.open::after { content: none; }
+  .blank-all-btn { margin-left: 6px; min-height: 30px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--ok); background: var(--ok-bg); color: var(--ok); font-size: 11.5px; font-weight: 700; font-family: inherit; cursor: pointer; vertical-align: middle; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
+  /* ===== ⏱️ 2차 90분 실전 모의고사 ===== */
+  .exam-mode-bar { display: flex; gap: 8px; margin-bottom: 12px; }
+  .mode-switch { flex: 1 1 0; min-width: 0; min-height: 42px; padding: 8px 10px; border-radius: 11px; border: 1px solid var(--border); background: var(--card); color: var(--sub); font-size: 13px; font-weight: 700; font-family: inherit; line-height: 1.35; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .mode-switch.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+  .mode-switch .ex-mini { font-variant-numeric: tabular-nums; font-weight: 700; opacity: .9; }
+  .exam-setup h3.exam-h { margin: 0 0 6px; font-size: 16px; }
+  .exam-desc { margin: 0 0 12px; font-size: 13px; color: var(--sub); font-weight: 500; }
+  .exam-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; }
+  .exam-lbl { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 700; color: var(--sub); flex: 1 1 150px; min-width: 0; }
+  .exam-lbl select { min-height: 40px; padding: 7px 10px; border-radius: 9px; border: 1px solid var(--border); font-size: 13.5px; font-weight: 700; background: #fafbfd; font-family: inherit; }
+  .btn-start { flex: 1 1 150px; min-width: 0; min-height: 40px; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--accent); background: var(--accent); color: #fff; font-size: 13.5px; font-weight: 800; font-family: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .btn-start:active { transform: scale(0.98); }
+  .exam-meta { margin-top: 10px; font-size: 12.5px; color: var(--sub); font-weight: 700; }
+  .exam-timer { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; background: var(--navy); color: #fff; border-radius: 14px; padding: 10px 14px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(15,20,35,.18); }
+  .exam-timer b { font-size: 13.5px; font-weight: 700; }
+  .exam-timer #ex-disp { font-variant-numeric: tabular-nums; font-size: 18px; font-weight: 800; margin-left: 2px; }
+  .exam-timer .exam-state { display: inline-block; margin-left: 8px; font-size: 11.5px; color: #c7d0e3; font-weight: 700; }
+  .exam-timer.warn { background: var(--bad); }
+  .exam-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .btn-reveal { min-height: 38px; padding: 7px 12px; border-radius: 9px; border: none; background: #fff; color: var(--navy); font-size: 12.5px; font-weight: 800; font-family: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .exam-count { font-size: 12px; font-weight: 700; color: var(--sub); white-space: nowrap; }
+  .exam-sub-q + .exam-sub-q { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+  .memo-wrap { margin-top: 12px; }
+  .memo-lbl { display: block; font-size: 12.5px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .memo-lbl span { font-weight: 600; color: var(--sub); font-size: 11.5px; margin-left: 4px; }
+  .memo-ta { width: 100%; min-height: 150px; padding: 11px 12px; border: 1px solid var(--border); border-radius: 11px; background: #fafbfd; font-family: inherit; font-size: 14px; line-height: 1.6; color: var(--text); resize: vertical; }
+  .memo-ta:focus { outline: 2px solid #aeb8cf; outline-offset: 1px; background: #fff; }
+  .exam-ans { margin: 12px 0 0; padding: 14px; border-radius: 12px; background: #f7f9fd; border: 1px solid var(--border); border-left: 4px solid var(--ok); font-size: 13.5px; }
+  .exam-ans h5 { margin: 4px 0 10px; font-size: 13px; color: var(--ok); }
+  .exam-ans .md-exp { margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--border); }
+  .exam-ans .md-exp h5 { color: var(--accent); }
+  .exam-sub-a + .exam-sub-a { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border); }
+  @media (max-width: 600px) {
+    .blank-toggle { flex: 1 1 100%; }
+    .mode-switch { font-size: 12.5px; padding: 8px 8px; }
+    .exam-timer { padding: 9px 12px; }
+    .exam-timer b { font-size: 12.5px; }
+    .exam-timer #ex-disp { font-size: 17px; }
+    .exam-timer .exam-state { display: block; margin: 2px 0 0; }
+    .btn-reveal { width: 100%; min-height: 40px; }
+    .memo-ta { font-size: 14.5px; }
   }
 </style>
 </head>
@@ -120,7 +173,7 @@
     <div class="header-top">
       <div class="header-title">
         <h1>🔥 소방시설관리사 실전 기출·합격 학습 시스템</h1>
-        <p>2010~2026년 1차 전 회차(11~26회) 기출 1,920문항 + 2차 서술형 16~26회 전 회차 250물음(문제 원문·모범답안·근거 조항) · 회차별 필터 · 타이머 모의고사 · 오답·북마크 · 52주 1년 커리큘럼</p>
+        <p>2010~2026년 1차 전 회차(11~26회) 기출 1,920문항 + 2차 서술형 16~26회 전 회차 250물음(문제 원문·모범답안·근거 조항) · 회차별 필터 · 빈칸 암기 모드 · 90분 실전 모의고사 · 오답·북마크 · 52주 1년 커리큘럼</p>
       </div>
       <button type="button" class="refresh-btn" id="btn-refresh" title="캐시를 무시하고 최신 버전으로 새로고침" onclick="hardRefresh(this)"><span class="ico" aria-hidden="true">🔄</span> 새로고침</button>
     </div>
@@ -343,10 +396,183 @@ function toggleEssayAns(id) {
   if (b) { b.classList.toggle("on", open); b.textContent = open ? "📖 모범답안 접기" : "📖 모범답안"; b.setAttribute("aria-expanded", open ? "true" : "false"); }
 }
 
-/* ---- 가벼운 마크다운 → HTML (굵게·목록·표·인용·그림) ---- */
-function mdInline(s) {
+/* ===== 🔲 빈칸 암기 모드 (모범답안의 핵심 키워드·수치를 가림) ===== */
+let essayBlank = false;
+const BLANK_UNITS = "%|vol%|중량%|wt%|mmAq|MPa|kPa|Pa|dB|kΩ|Ω|℃|°C|㎡|m²|㎥|m³|ℓ/min|L/min|m/min|kg|mg|mL|㎖|km|cm|mm|ℓ|L|g|V|mA|A|kW|Hz|kcal|분|초|시간|개소|개|곳|층|배|중량부|W|m";
+const BLANK_NUM_RE = new RegExp("(^|[^0-9.,])(\\d[\\d,]*(?:\\.\\d+)?)(\\s?)(" + BLANK_UNITS + ")(?![A-Za-z])", "g");
+
+function blankChip(text) {
+  return '<button type="button" class="blank-chip" data-v="' + text + '" onclick="blankTap(this)" aria-label="빈칸, 눌러서 보기">빈칸</button>';
+}
+function syncBlankAll(box) {
+  const btn = box && box.querySelector(".blank-all-btn");
+  if (!btn) return;
+  const chips = box.querySelectorAll(".blank-chip");
+  let allOpen = chips.length > 0;
+  chips.forEach(c => { if (!c.classList.contains("open")) allOpen = false; });
+  btn.textContent = allOpen ? "🙈 전체 빈칸 가리기" : "👁 전체 빈칸 보기";
+}
+function blankTap(el) {
+  const open = !el.classList.contains("open");
+  el.classList.toggle("open", open);
+  el.textContent = open ? (el.getAttribute("data-v") || "") : "빈칸";
+  syncBlankAll(el.closest(".essay-ans") || el.closest(".exam-ans"));
+}
+function blankAll(btn) {
+  const box = btn.closest(".essay-ans") || btn.closest(".exam-ans");
+  if (!box) return;
+  const chips = box.querySelectorAll(".blank-chip");
+  let reveal = false;
+  chips.forEach(c => { if (!c.classList.contains("open")) reveal = true; });
+  chips.forEach(c => { c.classList.toggle("open", reveal); c.textContent = reveal ? (c.getAttribute("data-v") || "") : "빈칸"; });
+  btn.textContent = reveal ? "🙈 전체 빈칸 가리기" : "👁 전체 빈칸 보기";
+}
+function toggleEssayBlank() { essayBlank = !essayBlank; render(); }
+
+/* ===== ⏱️ 2차 90분 실전 모의고사 ===== */
+const EXAM_SECONDS = 90 * 60;
+const EXAM_STORE = "ffm_exam_v1";
+const ESSAY_ITEMS = (() => {
+  const map = new Map();
+  ESSAY_QUESTIONS.forEach(q => {
+    const k = q.round + "|" + q.subject + "|" + q.no;
+    let it = map.get(k);
+    if (!it) { it = { key: k, round: q.round, subject: q.subject, no: q.no, year: q.year, subs: [] }; map.set(k, it); }
+    it.subs.push(q);
+  });
+  const out = [...map.values()];
+  out.forEach(it => {
+    it.subs.sort((a, b) => (a.sub || 1) - (b.sub || 1));
+    it.score = it.subs.reduce((s, q) => s + (q.score || 0), 0);
+  });
+  return out.sort((a, b) => (b.round - a.round) || (a.no - b.no));
+})();
+let essayTab = "list";
+let examSubj = "점검실무행정";
+let examSet = [];
+let examSec = EXAM_SECONDS;
+let examTimer = null, examRunning = false, examDone = false, examTimeUp = false;
+let examMemo = {}, examRoundUsed = 0, examMemoSaveT = 0;
+
+function examRoundsOf(subject) {
+  return [...new Set(ESSAY_ITEMS.filter(it => it.subject === subject).map(it => it.round))];
+}
+function setEssayTab(t) { essayTab = t; render(); window.scrollTo({ top: 0 }); }
+function setExamSubj(s) { examSubj = s; render(); }
+function startExam() {
+  const rounds = examRoundsOf(examSubj);
+  if (!rounds.length) return;
+  let pick = rounds[Math.floor(Math.random() * rounds.length)];
+  if (rounds.length > 1 && pick === examRoundUsed) pick = rounds[(rounds.indexOf(pick) + 1) % rounds.length];
+  examRoundUsed = pick;
+  examSet = ESSAY_ITEMS.filter(it => it.subject === examSubj && it.round === pick).sort((a, b) => a.no - b.no);
+  examMemo = {}; examDone = false; examTimeUp = false;
+  examSec = EXAM_SECONDS; examRunning = true;
+  clearInterval(examTimer);
+  examTimer = setInterval(tickExam, 1000);
+  saveExam(); render(); window.scrollTo({ top: 0 });
+}
+function tickExam() {
+  if (!examRunning) return;
+  examSec = Math.max(0, examSec - 1);
+  const el = document.getElementById("ex-disp");
+  if (el) el.textContent = fmtTime(examSec);
+  const mini = document.getElementById("ex-mini");
+  if (mini) mini.textContent = " · " + fmtTime(examSec);
+  const box = document.getElementById("ex-timer");
+  if (box) box.classList.toggle("warn", examSec <= 300);
+  if (examSec <= 0) {
+    examRunning = false; examTimeUp = true;
+    clearInterval(examTimer); examTimer = null;
+    saveExam();
+    if (mode === "essay" && essayTab === "mock") render();
+  } else if (examSec % 15 === 0) { saveExam(); }
+}
+function submitExam() {
+  clearInterval(examTimer); examTimer = null;
+  examRunning = false; examDone = true;
+  saveExam(); render();
+  const first = document.querySelector(".exam-ans");
+  if (first && first.scrollIntoView) first.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+function setExamMemo(i, v) {
+  examMemo[i] = v;
+  if (!examMemoSaveT) examMemoSaveT = setTimeout(() => { examMemoSaveT = 0; saveExam(); }, 1200);
+}
+function saveExam() {
+  try {
+    localStorage.setItem(EXAM_STORE, JSON.stringify({ subj: examSubj, keys: examSet.map(it => it.key), memo: examMemo, sec: examSec, done: examDone, running: examRunning, at: Date.now() }));
+  } catch (e) {}
+}
+function loadExam() {
+  let d = null;
+  try { d = JSON.parse(localStorage.getItem(EXAM_STORE) || "null"); } catch (e) {}
+  if (!d || !Array.isArray(d.keys) || !d.keys.length) return;
+  const set = d.keys.map(k => ESSAY_ITEMS.find(it => it.key === k)).filter(Boolean);
+  if (set.length !== d.keys.length) return;
+  examSubj = ESSAY_SUBJECTS.includes(d.subj) ? d.subj : "점검실무행정";
+  examSet = set;
+  examMemo = d.memo || {};
+  examDone = !!d.done;
+  const elapsed = Math.max(0, Math.floor((Date.now() - (d.at || Date.now())) / 1000));
+  examSec = Math.max(0, (d.sec || 0) - (d.running ? elapsed : 0));
+  examRunning = !!d.running && !examDone && examSec > 0;
+  examTimeUp = !!d.running && examSec <= 0;
+  examRoundUsed = set[0] ? set[0].round : 0;
+  if (examRunning) { clearInterval(examTimer); examTimer = setInterval(tickExam, 1000); }
+}
+function renderEssayMock(app, modeBar) {
+  const total = examSet.reduce((s, it) => s + it.score, 0);
+  const meta = examSet.length ? examSet[0].subject + " · " + examSet[0].year + " 기출 " + examSet.length + "문항 · " + total + "점" : "";
+  let html = modeBar + `<div class="card exam-setup">
+      <h3 class="exam-h">⏱️ 2차 90분 실전 모의고사</h3>
+      <p class="exam-desc">과목을 고르고 <b>새 시험 시작</b>을 누르면 기출 한 회차가 실제 시험처럼 <b>3문항 · 100점</b>으로 출제되고 <b>90:00</b> 타이머가 시작됩니다. 목차·키워드를 메모한 뒤 <b>모범답안 일괄 대조</b>로 자가 채점하세요.</p>
+      <div class="exam-row">
+        <label class="exam-lbl">과목
+          <select onchange="setExamSubj(this.value)">${ESSAY_SUBJECTS.map(s => `<option value="${s}" ${s === examSubj ? "selected" : ""}>${s}</option>`).join("")}</select>
+        </label>
+        <button type="button" class="btn-start" onclick="startExam()">${examSet.length ? "🔄 새 시험 시작" : "▶ 새 시험 시작"}</button>
+      </div>
+      ${meta ? `<div class="exam-meta">${meta}</div>` : ""}
+    </div>`;
+  if (!examSet.length) { app.innerHTML = html; return; }
+  html += `<div class="exam-timer ${examSec <= 300 ? "warn" : ""}" id="ex-timer">
+      <div><b>⏱️ 남은 시간 <span id="ex-disp">${fmtTime(examSec)}</span></b><span class="exam-state">${examDone ? "대조 완료" : examTimeUp ? "⏰ 시간 종료" : examRunning ? "진행 중" : "대기"}</span></div>
+      <div class="exam-actions">${examDone ? "" : `<button type="button" class="btn-reveal" onclick="submitExam()">📖 모범답안 일괄 대조</button>`}</div>
+    </div>`;
+  html += examSet.map((it, i) => `<div class="card exam-card">
+      <div class="card-top">
+        <span class="badge">${it.subject} · ${it.year} ${it.no}번</span>
+        <span class="exam-count">${i + 1} / ${examSet.length} · ${it.score}점</span>
+      </div>
+      ${it.subs[0] && it.subs[0].topic ? `<div class="essay-sub">${esc(it.subs[0].topic)}</div>` : ""}
+      <div class="q-title md-body essay-q">${it.subs.map(s => `<div class="exam-sub-q">${mdHtml(s.q)}</div>`).join("")}</div>
+      <div class="memo-wrap">
+        <label class="memo-lbl" for="ex-memo-${i}">✍️ 내 답안 메모 <span>목차·키워드·수치 중심</span></label>
+        <textarea id="ex-memo-${i}" class="memo-ta" rows="7" placeholder="답안을 여기에 적어 두세요. (자동 저장)" oninput="setExamMemo(${i}, this.value)">${esc(examMemo[i] || "")}</textarea>
+      </div>
+      ${examDone ? `<div class="exam-ans">
+        <h5>📖 모범답안 · 풀이</h5>
+        ${it.subs.map(s => `<div class="md-body exam-sub-a">${mdHtml(s.ans)}</div>`).join("")}
+        ${it.subs.some(s => s.exp) ? `<div class="md-exp"><h5>🔑 암기 포인트 · 근거</h5>${it.subs.filter(s => s.exp).map(s => `<div class="md-body exam-sub-a">${mdHtml(s.exp)}</div>`).join("")}</div>` : ""}
+      </div>` : ""}
+    </div>`).join("");
+  app.innerHTML = html;
+}
+
+/* ---- 가벼운 마크다운 → HTML (굵게·목록·표·인용·그림 / blank면 키워드·수치를 빈칸으로) ---- */
+function mdInline(s, blank) {
   let t = esc(s);
   t = t.replace(/\[그림:\s*([^\s\]]+)\s*\]/g, (m, u) => `<img class="q-img" src="${u}" alt="문제 그림" loading="lazy">`);
+  if (blank) {
+    const toks = [];
+    const keep = html => "\u0001" + (toks.push(html) - 1) + "\u0001";
+    t = t.replace(/\*\*(.+?)\*\*/g, (m, k) => keep(blankChip(k)));
+    t = t.replace(BLANK_NUM_RE, (m, pre, num, sp, unit) => pre + keep(blankChip(num + sp + unit)));
+    t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
+    t = t.replace(/\u0001(\d+)\u0001/g, (m, i) => toks[+i]);
+    return t;
+  }
   t = t.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
   t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
   return t;
@@ -354,11 +580,12 @@ function mdInline(s) {
 function mdCells(row) {
   return row.replace(/^\s*\|/, "").replace(/\|\s*$/, "").split("|").map(c => c.trim());
 }
-function mdHtml(src) {
+function mdHtml(src, blank) {
   const lines = String(src || "").split("\n").map(l => /^>\s*\|/.test(l) ? l.replace(/^>\s*/, "") : l);
   const out = [];
   let para = [];
-  const flush = () => { if (para.length) { out.push("<p>" + para.map(mdInline).join("<br>") + "</p>"); para = []; } };
+  const inl = x => mdInline(x, blank);
+  const flush = () => { if (para.length) { out.push("<p>" + para.map(inl).join("<br>") + "</p>"); para = []; } };
   let i = 0;
   while (i < lines.length) {
     const ln = lines[i];
@@ -368,24 +595,24 @@ function mdHtml(src) {
       const head = mdCells(ln); const rows = [];
       i += 2;
       while (i < lines.length && /^\s*\|/.test(lines[i])) { rows.push(mdCells(lines[i])); i++; }
-      out.push("<table><thead><tr>" + head.map(c => "<th>" + mdInline(c) + "</th>").join("") + "</tr></thead><tbody>" +
-        rows.map(r => "<tr>" + r.map(c => "<td>" + mdInline(c) + "</td>").join("") + "</tr>").join("") + "</tbody></table>");
+      out.push("<table><thead><tr>" + head.map(c => "<th>" + inl(c) + "</th>").join("") + "</tr></thead><tbody>" +
+        rows.map(r => "<tr>" + r.map(c => "<td>" + inl(c) + "</td>").join("") + "</tr>").join("") + "</tbody></table>");
       continue;
     }
     if (/^\s*>\s?/.test(ln)) {
       flush(); const q = [];
       while (i < lines.length && /^\s*>\s?/.test(lines[i])) { q.push(lines[i].replace(/^\s*>\s?/, "")); i++; }
-      out.push("<blockquote>" + q.map(mdInline).join("<br>") + "</blockquote>"); continue;
+      out.push("<blockquote>" + q.map(inl).join("<br>") + "</blockquote>"); continue;
     }
     if (/^\s*\*\s+/.test(ln)) {
       flush(); const li = [];
       while (i < lines.length && /^\s*\*\s+/.test(lines[i])) { li.push(lines[i].replace(/^\s*\*\s+/, "")); i++; }
-      out.push("<ul>" + li.map(x => "<li>" + mdInline(x) + "</li>").join("") + "</ul>"); continue;
+      out.push("<ul>" + li.map(x => "<li>" + inl(x) + "</li>").join("") + "</ul>"); continue;
     }
     if (/^\s*\d+\.\s+/.test(ln)) {
       flush(); const li = [];
       while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) { li.push(lines[i].replace(/^\s*\d+\.\s+/, "")); i++; }
-      out.push("<ol>" + li.map(x => "<li>" + mdInline(x) + "</li>").join("") + "</ol>"); continue;
+      out.push("<ol>" + li.map(x => "<li>" + inl(x) + "</li>").join("") + "</ol>"); continue;
     }
     if (!ln.trim()) { flush(); i++; continue; }
     para.push(ln); i++;
@@ -408,22 +635,32 @@ function essayPager(total) {
 
 function renderEssay() {
   const sbar = document.getElementById("subject-bar");
+  const app = document.getElementById("app");
+  const modeBar = `<div class="exam-mode-bar">
+    <button type="button" class="mode-switch ${essayTab === "list" ? "active" : ""}" onclick="setEssayTab('list')">📋 기출 전체 풀기</button>
+    <button type="button" class="mode-switch ${essayTab === "mock" ? "active" : ""}" onclick="setEssayTab('mock')">⏱️ 90분 실전 모의고사<span class="ex-mini" id="ex-mini">${examRunning ? " · " + fmtTime(examSec) : ""}</span></button>
+  </div>`;
+  if (essayTab === "mock") {
+    sbar.style.display = "none"; sbar.innerHTML = "";
+    renderEssayMock(app, modeBar);
+    return;
+  }
   sbar.style.display = "flex";
   const tabs = ["전체", ...ESSAY_SUBJECTS, ESSAY_BOOKMARK];
   sbar.innerHTML = tabs.map(s => `<button class="tab ${s === essaySubj ? "active" : ""}" onclick="setEssaySubj('${s}')">${s}</button>`).join("");
-  const app = document.getElementById("app");
   const list = essayPool();
   if (!list.length) {
-    app.innerHTML = `<div class="card">해당하는 2차 기출 물음이 없습니다.${essaySubj === ESSAY_BOOKMARK ? " ★ 헷갈림으로 표시한 물음이 아직 없습니다." : ""}</div>`;
+    app.innerHTML = modeBar + `<div class="card">해당하는 2차 기출 물음이 없습니다.${essaySubj === ESSAY_BOOKMARK ? " ★ 헷갈림으로 표시한 물음이 아직 없습니다." : ""}</div>`;
     return;
   }
   const pages = Math.ceil(list.length / PAGE_SIZE);
   if (essayPage >= pages) essayPage = pages - 1;
   const view = list.slice(essayPage * PAGE_SIZE, (essayPage + 1) * PAGE_SIZE);
-  app.innerHTML = essayPager(list.length) + view.map(q => {
+  app.innerHTML = modeBar + essayPager(list.length) + view.map(q => {
     const done = !!state.essayDone[q.id];
     const star = !!state.essayStars[q.id];
     const open = !!essayOpen[q.id];
+    const blankOn = essayBlank && open;
     const noLabel = q.sub > 1 ? `${q.no}번 물음 ${q.sub}` : `${q.no}번`;
     return `<div class="card" id="ec-${q.id}">
       <div class="card-top">
@@ -435,8 +672,8 @@ function renderEssay() {
       ${q.topic ? `<div class="essay-sub">${esc(q.topic)}${q.score ? ` · ${q.score}점` : ""}</div>` : ""}
       <div class="q-title md-body essay-q">${mdHtml(q.q)}</div>
       <div class="essay-ans ${open ? "show" : ""}" id="ea-${q.id}">
-        <h5>📖 모범답안 · 풀이</h5>
-        <div class="md-body">${mdHtml(q.ans)}</div>
+        <h5>📖 모범답안 · 풀이${essayBlank ? ` <button type="button" class="blank-all-btn" onclick="blankAll(this)">👁 전체 빈칸 보기</button>` : ""}</h5>
+        <div class="md-body">${mdHtml(q.ans, blankOn)}</div>
         ${q.exp ? `<div class="md-exp"><h5>🔑 암기 포인트 · 근거</h5><div class="md-body">${mdHtml(q.exp)}</div></div>` : ""}
       </div>
       <div class="essay-tools">
@@ -460,10 +697,12 @@ function renderStats() {
 function renderFilterBar() {
   const fbar = document.getElementById("filter-bar");
   if (mode === "essay") {
+    if (essayTab === "mock") { fbar.style.display = "none"; fbar.innerHTML = ""; return; }
     fbar.style.display = "flex";
     const opts = [`<option value="전체" ${essayRound === "전체" ? "selected" : ""}>전체 (16~26회)</option>`]
       .concat(ESSAY_ROUNDS.map(r => `<option value="${r}" ${essayRound === r ? "selected" : ""}>${r}회 (${essayYearOf(r)})</option>`)).join("");
     fbar.innerHTML = `✍️ 회차 <select onchange="setEssayRound(this.value)">${opts}</select>` +
+      `<button type="button" class="blank-toggle ${essayBlank ? "on" : ""}" id="btn-blank" onclick="toggleEssayBlank()" aria-pressed="${essayBlank ? "true" : "false"}" title="모범답안의 핵심 키워드·수치를 빈칸으로 가립니다">🔲 빈칸 암기 모드${essayBlank ? " ON" : ""}</button>` +
       `<span class="essay-count" id="essay-prog">${essayProgText()}</span>`;
     return;
   }
@@ -607,6 +846,7 @@ function hardRefresh(btn) {
   location.replace(base + "?v=" + Date.now());
 }
 
+loadExam();
 render();
 </script>
 </body>
