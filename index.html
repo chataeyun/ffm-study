@@ -392,6 +392,12 @@ function toggleEssayAns(id) {
   const open = !box.classList.contains("show");
   box.classList.toggle("show", open);
   essayOpen[id] = open;
+  // 빈칸 암기 모드: 답안을 펼칠 때 가림 상태로 다시 그린다(닫을 때는 본문을 비운다)
+  if (essayBlank) {
+    const q = ESSAY_QUESTIONS.find(x => x.id === id);
+    const body = box.querySelector(".md-body");
+    if (q && body) body.innerHTML = open ? mdHtml(q.ans, true) : "";
+  }
   const b = document.getElementById("eb-" + id);
   if (b) { b.classList.toggle("on", open); b.textContent = open ? "📖 모범답안 접기" : "📖 모범답안"; b.setAttribute("aria-expanded", open ? "true" : "false"); }
 }
