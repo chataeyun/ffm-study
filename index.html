@@ -327,7 +327,7 @@ function toggleEssayAns(id) {
 /* ---- 가벼운 마크다운 → HTML (굵게·목록·표·인용·그림) ---- */
 function mdInline(s) {
   let t = esc(s);
-  t = t.replace(/\[그림:\s*(https?:\/\/[^\s\]]+)\s*\]/g, (m, u) => `<img class="q-img" src="${u}" alt="문제 그림" loading="lazy">`);
+  t = t.replace(/\[그림:\s*([^\s\]]+)\s*\]/g, (m, u) => `<img class="q-img" src="${u}" alt="문제 그림" loading="lazy">`);
   t = t.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
   t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
   return t;
