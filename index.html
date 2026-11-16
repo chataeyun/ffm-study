@@ -28,10 +28,14 @@
   .tab { border: 1px solid var(--border); background: var(--card); color: var(--sub); padding: 7px 12px; border-radius: 999px; font-size: 12.5px; font-weight: 600; cursor: pointer; }
   .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
   .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(15,20,35,0.03); }
-  .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 8px; }
+  .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 8px; flex-wrap: wrap; }
   .badge { font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
   .star-btn { border: 1px solid var(--border); background: #fff; border-radius: 8px; padding: 4px 10px; font-size: 12px; cursor: pointer; font-weight: 600; }
   .star-btn.on { background: #fff7db; border-color: #f0b429; color: #b7791f; }
+  .card-tools { display: flex; gap: 6px; align-items: center; margin-left: auto; flex-shrink: 0; }
+  .exp-btn { border: 1px solid var(--border); background: #fff; border-radius: 8px; padding: 5px 11px; font-size: 12.5px; font-weight: 700; color: var(--text); cursor: pointer; white-space: nowrap; min-height: 34px; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .exp-btn:active { transform: scale(0.97); }
+  .exp-btn.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   .q-title { font-size: 15.5px; font-weight: 700; margin: 0 0 12px; white-space: pre-line; }
   .choices { display: grid; gap: 8px; }
   .choice { text-align: left; border: 1px solid var(--border); background: #fafbfd; padding: 11px 14px; border-radius: 11px; font-size: 14px; cursor: pointer; transition: 0.12s; }
@@ -53,7 +57,11 @@
   .notice { background: #fff8e6; border: 1px solid #f5d896; border-radius: 12px; padding: 12px 14px; font-size: 13px; margin-bottom: 14px; }
   .score-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13.5px; }
   .score-table th, .score-table td { border-bottom: 1px solid var(--border); padding: 8px; text-align: left; }
-  @media (max-width: 600px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .card-top { align-items: flex-start; }
+    .exp-btn, .star-btn { min-height: 38px; padding: 7px 12px; font-size: 13px; }
+  }
 
   .filter-bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; font-size: 13px; font-weight: 700; }
   .filter-bar select { padding: 7px 10px; border-radius: 9px; border: 1px solid var(--border); font-size: 13px; font-weight: 600; background: #fafbfd; }
@@ -127,6 +135,7 @@ let mockAnswers = {};
 let mockSubmitted = false;
 let mockTimer = null;
 let mockSec = 0;
+let revealed = {};   // 문제별 📖 해설 펼침 상태(통계와 무관)
 
 QUESTIONS.forEach(q => { const m = /(\d+)회/.exec(q.year); q.round = m ? +m[1] : 0; });
 const ROUNDS = [...new Set(QUESTIONS.map(q => q.round))].sort((a,b) => b-a);
@@ -214,7 +223,22 @@ function startTimer() {
 function fmtTime(s) { return String(Math.floor(s/60)).padStart(2,'0') + ":" + String(s%60).padStart(2,'0'); }
 
 function toggleStar(id) { state.stars[id] = !state.stars[id]; save(); render(); }
-function answerStudy(id, idx) { state.answers[id] = idx; save(); render(); }
+// 📖 해설만 펼쳐 본 문제는 state.answers에 넣지 않는다(풀이 완료·정답률 통계 보존)
+function expOpen(id) { return revealed[id] === undefined ? state.answers[id] !== undefined : revealed[id]; }
+function toggleExplain(id) {
+  const q = QMAP[id]; if (!q) return;
+  const has = state.answers[id] !== undefined;
+  const open = !expOpen(id);
+  revealed[id] = open;
+  const card = document.getElementById("qc-" + id);
+  if (!card) { render(); return; }
+  const ex = card.querySelector(".explain");
+  const btn = card.querySelector(".exp-btn");
+  if (ex) ex.classList.toggle("show", open);
+  if (btn) { btn.classList.toggle("on", open); btn.textContent = open ? "📖 해설 접기" : "📖 해설"; btn.setAttribute("aria-expanded", open ? "true" : "false"); }
+  if (!has) card.querySelectorAll(".choice").forEach((el, i) => el.classList.toggle("correct", open && i === q.ans));
+}
+function answerStudy(id, idx) { state.answers[id] = idx; delete revealed[id]; save(); render(); }
 function answerMock(id, idx) { if(mockSubmitted) return; mockAnswers[id] = idx; render(); }
 function submitMock() { clearInterval(mockTimer); mockTimer = null; mockSubmitted = true; render(); window.scrollTo({top:0,behavior:'smooth'}); }
 function resetMock() { buildMock(); render(); window.scrollTo({top:0}); }
@@ -280,18 +304,22 @@ function render() {
     const view = list.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
     app.innerHTML = pagerHtml(list.length) + view.map(q => {
       const p = state.answers[q.id]; const has = p !== undefined;
-      return `<div class="card">
+      const open = expOpen(q.id); const showAns = has || open;
+      return `<div class="card" id="qc-${q.id}">
         <div class="card-top">
           <span class="badge">${q.subject} · ${q.year} ${q.no}번</span>
-          <button class="star-btn ${state.stars[q.id]?'on':''}" onclick="toggleStar(${q.id})">★ ${state.stars[q.id]?'북마크됨':'헷갈림'}</button>
+          <div class="card-tools">
+            <button class="exp-btn ${open?'on':''}" onclick="toggleExplain(${q.id})" aria-expanded="${open?'true':'false'}">${open?'📖 해설 접기':'📖 해설'}</button>
+            <button class="star-btn ${state.stars[q.id]?'on':''}" onclick="toggleStar(${q.id})">★ ${state.stars[q.id]?'북마크됨':'헷갈림'}</button>
+          </div>
         </div>
         <p class="q-title">Q${q.id}. ${fmt(q.q)}</p>
         <div class="choices">${q.choices.map((c,i) => {
           let cls = "choice";
-          if (has) { if (i === q.ans) cls += " correct"; else if (i === p) cls += " wrong"; }
+          if (showAns) { if (i === q.ans) cls += " correct"; else if (i === p) cls += " wrong"; }
           return `<button class="${cls}" onclick="answerStudy(${q.id},${i})">${i+1}. ${fmt(c)}</button>`;
         }).join("")}</div>
-        <div class="explain ${has?'show':''}" style="white-space:pre-line"><b>정답 ${q.ans+1}번 · 해설:</b> ${fmt(q.exp)}</div>
+        <div class="explain ${open?'show':''}" style="white-space:pre-line"><b>정답 ${q.ans+1}번 · 해설:</b> ${fmt(q.exp)}</div>
       </div>`;
     }).join("") + pagerHtml(list.length);
   }
