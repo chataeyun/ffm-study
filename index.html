@@ -17,6 +17,14 @@
   .wrap { max-width: 960px; margin: 0 auto; padding: 16px; }
   header h1 { margin: 0 0 6px; font-size: 22px; letter-spacing: -0.3px; }
   header p { margin: 0; font-size: 13px; color: #c7d0e3; }
+  .header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .header-top .header-title { flex: 1 1 auto; min-width: 0; }
+  .refresh-btn { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 5px; border: 1px solid rgba(255,255,255,0.32); background: rgba(255,255,255,0.14); color: #fff; font-family: inherit; font-size: 13px; font-weight: 700; letter-spacing: -0.2px; padding: 9px 14px; border-radius: 999px; min-height: 40px; cursor: pointer; white-space: nowrap; -webkit-tap-highlight-color: transparent; touch-action: manipulation; transition: 0.12s; }
+  .refresh-btn:hover { background: rgba(255,255,255,0.22); }
+  .refresh-btn:active { transform: scale(0.96); background: rgba(255,255,255,0.3); }
+  .refresh-btn .ico { display: inline-block; font-size: 14px; line-height: 1; }
+  .refresh-btn.spin .ico { animation: ffm-spin 0.7s linear infinite; }
+  @keyframes ffm-spin { to { transform: rotate(360deg); } }
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 14px 0; }
   .stat { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 12px; text-align: center; }
   .stat b { display: block; font-size: 20px; color: var(--accent); }
@@ -58,6 +66,12 @@
   .score-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13.5px; }
   .score-table th, .score-table td { border-bottom: 1px solid var(--border); padding: 8px; text-align: left; }
   @media (max-width: 600px) {
+    header { padding: 18px 14px 16px; }
+    header h1 { font-size: 18px; }
+    header p { font-size: 12px; }
+    .header-top { gap: 8px; }
+    .refresh-btn { font-size: 12px; padding: 8px 11px; min-height: 38px; border-radius: 10px; }
+    .refresh-btn .ico { font-size: 13px; }
     .stats { grid-template-columns: repeat(2, 1fr); }
     .card-top { align-items: flex-start; }
     .exp-btn, .star-btn { min-height: 40px; padding: 8px 13px; font-size: 13px; border-radius: 9px; }
@@ -103,8 +117,13 @@
 <body>
 <header>
   <div class="wrap">
-    <h1>🔥 소방시설관리사 실전 기출·합격 학습 시스템</h1>
-    <p>2010~2026년 1차 전 회차(11~26회) 기출 1,920문항 + 2차 서술형 16~26회 전 회차 250물음(문제 원문·모범답안·근거 조항) · 회차별 필터 · 타이머 모의고사 · 오답·북마크 · 52주 1년 커리큘럼</p>
+    <div class="header-top">
+      <div class="header-title">
+        <h1>🔥 소방시설관리사 실전 기출·합격 학습 시스템</h1>
+        <p>2010~2026년 1차 전 회차(11~26회) 기출 1,920문항 + 2차 서술형 16~26회 전 회차 250물음(문제 원문·모범답안·근거 조항) · 회차별 필터 · 타이머 모의고사 · 오답·북마크 · 52주 1년 커리큘럼</p>
+      </div>
+      <button type="button" class="refresh-btn" id="btn-refresh" title="캐시를 무시하고 최신 버전으로 새로고침" onclick="hardRefresh(this)"><span class="ico" aria-hidden="true">🔄</span> 새로고침</button>
+    </div>
   </div>
 </header>
 
@@ -580,6 +599,14 @@ function render() {
       `</div>`;
   }
 }
+/* ===== 상단 새로고침: Safari · 홈화면 standalone 캐시 무시 ===== */
+function hardRefresh(btn) {
+  if (btn) btn.classList.add("spin");
+  try { save(); } catch (e) {}
+  const base = location.href.split("#")[0].split("?")[0];
+  location.replace(base + "?v=" + Date.now());
+}
+
 render();
 </script>
 </body>
