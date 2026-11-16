@@ -835,6 +835,12 @@ function structBody(q, compact) {
   const secs = structSkeleton(q);
   const keys = structKeys(q.ans || "");
   const basis = structBasis(q.exp || "");
+  let headless = 0;
+  const secRows = secs.map(s => {
+    let label = s.head;
+    if (!label) { headless++; label = headless === 1 ? "본문" : "본문 " + headless; }
+    return `<li><b class="st-no">${esc(label)}</b>${s.note ? `<span class="st-note">${esc(s.note)}</span>` : ""}</li>`;
+  }).join("");
   return `<div class="st-head">
       <span class="st-type ${T.cls}">${T.icon} ${T.label}</span>
       ${q.score && !compact ? `<span class="st-score">배점 ${q.score}점</span>` : ""}
@@ -842,7 +848,7 @@ function structBody(q, compact) {
     </div>
     <div class="st-block">
       <div class="st-h">📑 답안 목차 뼈대 <span class="st-h-sub">문항이 요구한 칸 수</span></div>
-      <ul class="st-secs">${secs.map(s => `<li><b class="st-no">${esc(s.head || "본문")}</b>${s.note ? `<span class="st-note">${esc(s.note)}</span>` : ""}</li>`).join("")}</ul>
+      <ul class="st-secs">${secRows}</ul>
     </div>
     <div class="st-block">
       <div class="st-h">🎯 채점 포인트</div>
