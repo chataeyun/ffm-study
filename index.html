@@ -214,6 +214,7 @@
   .st-hint { margin: 11px 0 0; font-size: 12px; font-weight: 600; color: var(--sub); background: #fff; border: 1px dashed var(--border); border-radius: 9px; padding: 8px 10px; }
   .st-sub + .st-sub { margin-top: 14px; padding-top: 12px; border-top: 1px dashed #c9d3e6; }
   .st-sub-h { font-size: 12px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+  .st-item-h { font-size: 12.5px; font-weight: 800; color: var(--navy); margin-bottom: 9px; }
   .exam-struct-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
   @media (max-width: 600px) {
     .card-tools { flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
@@ -813,7 +814,7 @@ function structBasis(exp) {
   const RE_STD = /(NFTC|NFPC|NFSC|NFPA|KFI|KFS)\s*\d{2,4}[A-Z]?(?:\s*(?:표|별표)\s*[\d.]+)?(?:\s*제?\s*[\d.]+(?:\s*호)?)?/g;
   const push = v => {
     v = String(v).replace(/\s+/g, " ").replace(/^[\s\-–—·*]+/, "").replace(/[\s.]+$/, "");
-    if (v.length >= 4 && out.indexOf(v) < 0) out.push(v);
+    if (v.length >= 4 && !out.some(o => o === v || o.indexOf(v) === 0 || v.indexOf(o) === 0)) out.push(v);
   };
   scope.forEach(ln => {
     const t = ln.replace(/^\s*[*>·-]\s*/, "").trim();
@@ -836,8 +837,8 @@ function structBody(q, compact) {
   const basis = structBasis(q.exp || "");
   return `<div class="st-head">
       <span class="st-type ${T.cls}">${T.icon} ${T.label}</span>
-      ${q.score ? `<span class="st-score">배점 ${q.score}점</span>` : ""}
-      <span class="st-score">정답 미포함 · 구조만</span>
+      ${q.score && !compact ? `<span class="st-score">배점 ${q.score}점</span>` : ""}
+      ${compact ? "" : `<span class="st-score">정답 미포함 · 구조만</span>`}
     </div>
     <div class="st-block">
       <div class="st-h">📑 답안 목차 뼈대 <span class="st-h-sub">문항이 요구한 칸 수</span></div>
@@ -857,7 +858,8 @@ function structBody(q, compact) {
     <p class="st-hint">🧠 뼈대만 보고 칸마다 들어갈 키워드를 먼저 떠올린 뒤 <b>📖 모범답안</b>으로 확인하세요.</p>`}`;
 }
 function structItemHtml(it) {
-  return it.subs.map((s, k) => `<div class="st-sub${k ? " sep" : ""}">
+  return `<div class="st-item-h">🧭 물음별 서술 틀 <span class="st-h-sub">정답 미포함 · 구조만</span></div>` +
+    it.subs.map((s, k) => `<div class="st-sub${k ? " sep" : ""}">
       <div class="st-sub-h">물음 ${s.sub || (k + 1)}${s.score ? " · " + s.score + "점" : ""}</div>
       ${structBody(s, true)}
     </div>`).join("");
