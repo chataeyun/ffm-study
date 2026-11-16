@@ -395,8 +395,11 @@ function toggleEssayAns(id) {
   // 빈칸 암기 모드: 답안을 펼칠 때 가림 상태로 다시 그린다(닫을 때는 본문을 비운다)
   if (essayBlank) {
     const q = ESSAY_QUESTIONS.find(x => x.id === id);
-    const body = box.querySelector(".md-body");
-    if (q && body) body.innerHTML = open ? mdHtml(q.ans, true) : "";
+    const bodies = box.querySelectorAll(".md-body");
+    if (q) {
+      if (bodies[0]) bodies[0].innerHTML = open ? mdHtml(q.ans, true) : "";
+      if (bodies[1]) bodies[1].innerHTML = open ? mdHtml(q.exp || "", true) : "";
+    }
   }
   const b = document.getElementById("eb-" + id);
   if (b) { b.classList.toggle("on", open); b.textContent = open ? "📖 모범답안 접기" : "📖 모범답안"; b.setAttribute("aria-expanded", open ? "true" : "false"); }
@@ -682,7 +685,7 @@ function renderEssay() {
       <div class="essay-ans ${open ? "show" : ""}" id="ea-${q.id}">
         <h5>📖 모범답안 · 풀이${essayBlank ? ` <button type="button" class="blank-all-btn" onclick="blankAll(this)">👁 전체 빈칸 보기</button>` : ""}</h5>
         <div class="md-body">${mdHtml(q.ans, blankOn)}</div>
-        ${q.exp ? `<div class="md-exp"><h5>🔑 암기 포인트 · 근거</h5><div class="md-body">${mdHtml(q.exp)}</div></div>` : ""}
+        ${q.exp ? `<div class="md-exp"><h5>🔑 암기 포인트 · 근거</h5><div class="md-body">${mdHtml(q.exp, blankOn)}</div></div>` : ""}
       </div>
       <div class="essay-tools">
         <button class="btn-done ${done ? "on" : ""}" id="ed-${q.id}" onclick="toggleEssayDone(${q.id})">${done ? "✅ 암기완료" : "⬜ 암기완료"}</button>
