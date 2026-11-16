@@ -165,6 +165,70 @@
     .btn-reveal { width: 100%; min-height: 40px; }
     .memo-ta { font-size: 14.5px; }
   }
+  /* ===== 🧭 서술 틀 · 2차 답안 구조 길라잡이 ===== */
+  .guide-wrap { margin-bottom: 10px; }
+  .guide-toggle { width: 100%; display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); background: linear-gradient(135deg, #f7f9fd, #edf1fa); color: var(--navy); border-radius: 14px; padding: 11px 14px; font-family: inherit; font-size: 13.5px; font-weight: 800; letter-spacing: -0.3px; cursor: pointer; min-height: 44px; text-align: left; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .guide-toggle .g-ico { font-size: 16px; line-height: 1; flex: 0 0 auto; }
+  .guide-toggle .g-sub { margin-left: auto; font-size: 11.5px; font-weight: 700; color: var(--sub); white-space: nowrap; flex: 0 0 auto; }
+  .guide-toggle .g-arrow { font-size: 11px; color: var(--sub); transition: transform .18s; flex: 0 0 auto; }
+  .guide-toggle.open { border-color: #b9c4dc; box-shadow: 0 2px 8px rgba(15,20,35,0.06); }
+  .guide-toggle.open .g-arrow { transform: rotate(180deg); }
+  .guide-body { display: none; margin-top: 8px; padding: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 14px; }
+  .guide-body.show { display: block; }
+  .g-card { border: 1px solid var(--border); border-left-width: 4px; border-radius: 12px; padding: 11px 12px; background: #fafbfd; }
+  .g-card + .g-card { margin-top: 9px; }
+  .g-card-h { font-size: 13.5px; font-weight: 800; letter-spacing: -0.2px; margin-bottom: 8px; }
+  .g-card.t-std { border-left-color: #b45309; } .g-card.t-std .g-card-h { color: #b45309; }
+  .g-card.t-calc { border-left-color: #6b3fa0; } .g-card.t-calc .g-card-h { color: #6b3fa0; }
+  .g-card.t-check { border-left-color: var(--ok); } .g-card.t-check .g-card-h { color: var(--ok); }
+  .g-card.t-op { border-left-color: #1e5b96; } .g-card.t-op .g-card-h { color: #1e5b96; }
+  .g-tips { margin: 8px 0 0; padding-left: 17px; font-size: 12.3px; color: var(--sub); font-weight: 600; }
+  .g-tips li { margin: 2px 0; }
+  .g-foot { margin: 10px 2px 0; font-size: 12px; color: var(--sub); font-weight: 600; }
+  .st-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
+  .st-step { display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--border); background: #fff; border-radius: 8px; padding: 4px 8px; font-size: 12px; font-weight: 700; color: #2b3344; }
+  .st-step i { font-style: normal; display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 9.5px; font-weight: 800; flex: 0 0 auto; }
+  .st-arrow { font-size: 11px; color: #9aa6bf; font-weight: 800; }
+  .struct-btn { min-height: 34px; padding: 5px 11px; border-radius: 8px; border: 1px solid var(--border); background: #fff; color: var(--navy); font-size: 12.5px; font-weight: 700; font-family: inherit; cursor: pointer; white-space: nowrap; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  .struct-btn.on { background: #eef2fb; border-color: #8fa3c8; color: #1e3a66; }
+  .struct-btn:active { transform: scale(0.97); }
+  .struct-box { display: none; margin: 12px 0 0; padding: 14px; border-radius: 12px; background: #f6f8fd; border: 1px solid var(--border); border-left: 4px solid #4a67a8; font-size: 13px; }
+  .struct-box.show { display: block; }
+  .st-head { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .st-type { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 800; padding: 3px 9px; border-radius: 999px; border: 1px solid; }
+  .st-type.t-std { color: #b45309; background: #fff5e6; border-color: #f0d3a8; }
+  .st-type.t-calc { color: #6b3fa0; background: #f3eeff; border-color: #d6c6f2; }
+  .st-type.t-check { color: var(--ok); background: var(--ok-bg); border-color: #b8e3d1; }
+  .st-type.t-op { color: #1e5b96; background: #e8f1fb; border-color: #bcd4ee; }
+  .st-score { font-size: 11.5px; font-weight: 700; color: var(--sub); }
+  .st-block + .st-block { margin-top: 11px; padding-top: 10px; border-top: 1px dashed var(--border); }
+  .st-h { font-size: 12.3px; font-weight: 800; color: #2b3344; margin-bottom: 7px; }
+  .st-h-sub { font-size: 10.5px; font-weight: 700; color: var(--sub); margin-left: 3px; }
+  .st-secs { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+  .st-secs li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; background: #fff; border: 1px solid var(--border); border-radius: 9px; padding: 7px 10px; }
+  .st-no { font-size: 12.8px; font-weight: 800; color: #1e3a66; letter-spacing: -0.2px; }
+  .st-note { font-size: 11.8px; font-weight: 700; color: #4a5568; background: #eef2f9; border-radius: 6px; padding: 2px 7px; margin-left: auto; }
+  .st-kw { font-size: 12.5px; font-weight: 600; color: #37415a; margin-top: 4px; line-height: 1.7; }
+  .st-basis { display: inline-block; font-size: 11.5px; font-weight: 700; color: #1e5b96; background: #e8f1fb; border-radius: 6px; padding: 2px 7px; margin: 2px 4px 0 0; }
+  .st-none { color: var(--sub); font-weight: 600; }
+  .st-hint { margin: 11px 0 0; font-size: 12px; font-weight: 600; color: var(--sub); background: #fff; border: 1px dashed var(--border); border-radius: 9px; padding: 8px 10px; }
+  .st-sub + .st-sub { margin-top: 14px; padding-top: 12px; border-top: 1px dashed #c9d3e6; }
+  .st-sub-h { font-size: 12px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+  .exam-struct-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  @media (max-width: 600px) {
+    .card-tools { flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+    .card-tools .exp-btn, .card-tools .struct-btn { min-height: 40px; padding: 8px 12px; font-size: 13px; border-radius: 9px; }
+    .guide-toggle { font-size: 13px; padding: 10px 12px; }
+    .guide-toggle .g-sub { display: none; }
+    .guide-body { padding: 10px; }
+    .g-card { padding: 10px; }
+    .st-step { font-size: 11.5px; padding: 4px 7px; }
+    .struct-box { padding: 12px 11px; }
+    .st-note { margin-left: 0; }
+    .st-no { font-size: 13px; }
+    .exam-struct-bar .struct-btn { flex: 1 1 100%; min-height: 40px; font-size: 13px; }
+  }
+
 </style>
 </head>
 <body>
@@ -173,7 +237,7 @@
     <div class="header-top">
       <div class="header-title">
         <h1>🔥 소방시설관리사 실전 기출·합격 학습 시스템</h1>
-        <p>2010~2026년 1차 전 회차(11~26회) 기출 1,920문항 + 2차 서술형 16~26회 전 회차 250물음(문제 원문·모범답안·근거 조항) · 회차별 필터 · 빈칸 암기 모드 · 90분 실전 모의고사 · 오답·북마크 · 52주 1년 커리큘럼</p>
+        <p>2010~2026년 1차 전 회차(11~26회) 기출 1,920문항 + 2차 서술형 16~26회 전 회차 250물음(문제 원문·모범답안·근거 조항) · 회차별 필터 · 🧭 서술 틀(답안 구조) 길라잡이 · 빈칸 암기 모드 · 90분 실전 모의고사 · 오답·북마크 · 52주 1년 커리큘럼</p>
       </div>
       <button type="button" class="refresh-btn" id="btn-refresh" title="캐시를 무시하고 최신 버전으로 새로고침" onclick="hardRefresh(this)"><span class="ico" aria-hidden="true">🔄</span> 새로고침</button>
     </div>
@@ -476,6 +540,7 @@ function startExam() {
   examRoundUsed = pick;
   examSet = ESSAY_ITEMS.filter(it => it.subject === examSubj && it.round === pick).sort((a, b) => a.no - b.no);
   examMemo = {}; examDone = false; examTimeUp = false;
+  for (const k in examStructOpen) delete examStructOpen[k];
   examSec = EXAM_SECONDS; examRunning = true;
   clearInterval(examTimer);
   examTimer = setInterval(tickExam, 1000);
@@ -533,7 +598,7 @@ function loadExam() {
 function renderEssayMock(app, modeBar) {
   const total = examSet.reduce((s, it) => s + it.score, 0);
   const meta = examSet.length ? examSet[0].subject + " · " + examSet[0].year + " 기출 " + examSet.length + "문항 · " + total + "점" : "";
-  let html = modeBar + `<div class="card exam-setup">
+  let html = modeBar + essayGuideHtml() + `<div class="card exam-setup">
       <h3 class="exam-h">⏱️ 2차 90분 실전 모의고사</h3>
       <p class="exam-desc">과목을 고르고 <b>새 시험 시작</b>을 누르면 기출 한 회차가 실제 시험처럼 <b>3문항 · 100점</b>으로 출제되고 <b>90:00</b> 타이머가 시작됩니다. 목차·키워드를 메모한 뒤 <b>모범답안 일괄 대조</b>로 자가 채점하세요.</p>
       <div class="exam-row">
@@ -556,6 +621,10 @@ function renderEssayMock(app, modeBar) {
       </div>
       ${it.subs[0] && it.subs[0].topic ? `<div class="essay-sub">${esc(it.subs[0].topic)}</div>` : ""}
       <div class="q-title md-body essay-q">${it.subs.map(s => `<div class="exam-sub-q">${mdHtml(s.q)}</div>`).join("")}</div>
+      <div class="exam-struct-bar">
+        <button type="button" class="struct-btn ${examStructOpen[i] ? "on" : ""}" id="esb-${i}" onclick="toggleExamStruct(${i})" aria-expanded="${examStructOpen[i] ? "true" : "false"}">${examStructOpen[i] ? "🧭 서술 틀 접기" : "🧭 서술 틀"}</button>
+      </div>
+      <div class="struct-box ${examStructOpen[i] ? "show" : ""}" id="est-${i}">${examStructOpen[i] ? structItemHtml(it) : ""}</div>
       <div class="memo-wrap">
         <label class="memo-lbl" for="ex-memo-${i}">✍️ 내 답안 메모 <span>목차·키워드·수치 중심</span></label>
         <textarea id="ex-memo-${i}" class="memo-ta" rows="7" placeholder="답안을 여기에 적어 두세요. (자동 저장)" oninput="setExamMemo(${i}, this.value)">${esc(examMemo[i] || "")}</textarea>
@@ -567,6 +636,292 @@ function renderEssayMock(app, modeBar) {
       </div>` : ""}
     </div>`).join("");
   app.innerHTML = html;
+}
+
+/* ===== 🧭 서술 틀 · 2차 답안 구조 길라잡이 =====
+   문항의 모범답안에서 '목차 뼈대'만 뽑아 보여 준다. 수치·키워드는 가리고,
+   몇 개의 단락/칸으로 써야 하는지만 남긴다. */
+const STRUCT_TYPES = {
+  std: { label: "기준·서술형", icon: "📜", cls: "t-std",
+    steps: ["관련 근거(법·NFTC)", "적용 대상·설치 기준(핵심 수치)", "예외·면제 조건"],
+    tips: ["근거 기준명(NFTC 번호·조항)을 먼저 한 줄로 적는다.",
+           "대상과 수치를 ‘~이상 / ~이하’로 정확히 끊어 쓴다.",
+           "단서·예외 조항은 별도 줄로 분리해 감점을 막는다."] },
+  calc: { label: "계산·설계형", icon: "🧮", cls: "t-calc",
+    steps: ["적용 공식 명시", "조건 대입·단위 환산", "산출값(단위 포함)·법정 기준 적부 판정"],
+    tips: ["공식을 먼저 쓰고 숫자를 대입한다(공식만 써도 부분점수).",
+           "MPa↔m, L↔㎥처럼 단위를 통일하고 중간 계산을 남긴다.",
+           "답에는 단위를 붙이고 법정 기준과 비교해 적/부를 판정한다."] },
+  check: { label: "점검·판단형", icon: "🔍", cls: "t-check",
+    steps: ["점검 항목·기준치", "현장 부적합·결함 원인", "보완·조치 사항"],
+    tips: ["‘판정(적합/부적합) → 근거 → 조치’ 3단으로 쓴다.",
+           "측정값과 기준치를 나란히 적어 판정 이유를 남긴다.",
+           "조치는 무엇을 어떻게(교체·보수·재시험)까지 구체적으로."] },
+  op: { label: "작동·계통형", icon: "⚙️", cls: "t-op",
+    steps: ["기동 조건(감지·스위치)", "신호 전달·제어반 동작", "설비 작동·방출 및 확인/복구"],
+    tips: ["순서를 화살표(→)로 끊고 단계 번호를 매긴다.",
+           "감지부 → 수신기 → 제어반 → 설비 작동을 빠뜨리지 않는다.",
+           "지연·인터록과 복구(원상복구) 단계까지 쓴다."] }
+};
+const STRUCT_GUIDE_ORDER = ["std", "calc", "check", "op"];
+const STRUCT_WORDS = {
+  calc: [["수리계산", 6], ["계산", 4], ["구하시오", 3], ["구하여", 3], ["산출", 3], ["유량", 3], ["방수압", 3],
+         ["방수량", 3], ["수두", 3], ["약제량", 3], ["저장량", 2], ["최소 개수", 3], ["개수를 구", 3], ["용량", 1],
+         ["수량", 1], ["양정", 3], ["동력", 2], ["비체적", 2], ["전압", 1], ["농도", 1], ["면적", 1], ["얼마", 3]],
+  check: [["점검표", 5], ["점검", 4], ["적부", 4], ["판정", 3], ["부적합", 4], ["조치", 3], ["보완", 3], ["원인", 2],
+          ["대책", 2], ["시험방법", 3], ["측정", 2], ["확인사항", 2], ["결함", 3], ["절차", 2]],
+  op: [["작동순서", 5], ["순서", 3], ["계통", 4], ["기동", 3], ["회로", 2], ["동작", 2], ["수신기", 2], ["제어반", 3],
+       ["신호", 2], ["타임차트", 5], ["논리식", 5], ["방출", 2], ["복구", 3], ["인터록", 3], ["도통", 3], ["결선", 3],
+       ["축압", 2], ["연동", 2], ["작동", 2]],
+  std: [["설치기준", 4], ["기준", 1], ["NFTC", 2], ["NFPC", 2], ["시행령", 2], ["시행규칙", 2], ["규정", 2], ["종류", 3],
+        ["쓰시오", 1], ["근거", 1], ["별표", 2], ["고시", 2], ["요건", 2], ["대상", 1]]
+};
+const STRUCT_UNITS = ["vol%", "중량%", "wt%", "mmAq", "MPa", "kPa", "ℓ/min", "L/min", "m/min", "kcal", "개소", "시간",
+  "kg", "mg", "mL", "㎖", "km", "cm", "mm", "kW", "Hz", "ℓ", "L", "g", "V", "mA", "dB", "kΩ", "㎡", "m²", "㎥", "m³",
+  "개", "곳", "층", "배", "분", "초", "%", "Pa", "Ω", "℃", "°C", "W", "m", "A"]
+  .sort((a, b) => b.length - a.length);
+const STRUCT_UNIT_RE = new RegExp("(\\d[\\d,]*(?:\\.\\d+)?)\\s*(" + STRUCT_UNITS.join("|") + ")(?![A-Za-z가-힣])", "g");
+const ESSAY_QM = {}; ESSAY_QUESTIONS.forEach(q => { ESSAY_QM[q.id] = q; });
+
+function structType(q) {
+  const qt = (q.q || "") + " " + (q.topic || ""), at = q.ans || "";
+  const sc = { calc: 0, check: 0, op: 0, std: 0 };
+  Object.keys(STRUCT_WORDS).forEach(k => STRUCT_WORDS[k].forEach(w => {
+    let i = 0, c = 0;
+    while ((i = qt.indexOf(w[0], i)) !== -1) { c++; i += w[0].length; }
+    sc[k] += w[1] * c;
+  }));
+  if (/답\s*:/.test(at)) sc.calc += 5;
+  if (at.indexOf("√") !== -1) sc.calc += 3;
+  if (/\d\s*[×÷]\s*\d/.test(at)) sc.calc += 2;
+  if (/적합|판정/.test(at)) sc.check += 2;
+  if (at.indexOf("→") !== -1) sc.op += 2;
+  const pri = { calc: 4, check: 3, op: 2, std: 1 };
+  let best = "std";
+  Object.keys(sc).forEach(k => { if (sc[k] > sc[best] || (sc[k] === sc[best] && pri[k] > pri[best])) best = k; });
+  return best;
+}
+function structNorm(s) { return String(s || "").replace(/[\s·,.\-–—()\[\]{}'"“”‘’]/g, ""); }
+function structMaskNums(t) { return String(t).replace(STRUCT_UNIT_RE, "▢"); }
+function structKeys(ans) {
+  const out = [];
+  const re = /\*\*(.+?)\*\*/g; let m;
+  while ((m = re.exec(String(ans || "")))) {
+    const k = structNorm(m[1]);
+    if (k.length >= 2 && out.indexOf(k) < 0) out.push(k);
+  }
+  return out;
+}
+function structMaskTitle(title, qtext, keys) {
+  const nq = structNorm(qtext);
+  const out = title.split(/\s+/).map(tok => {
+    const core = tok.replace(/[^0-9A-Za-z가-힣]/g, "");
+    if (!core) return tok;
+    if (/^[\d.,]+$/.test(core)) return nq.indexOf(core) >= 0 ? tok : "▢";
+    if (core.length <= 1) return qtext.indexOf(core) >= 0 ? tok : "▢";
+    const keep = nq.indexOf(core) >= 0 || (core.length >= 3 && nq.indexOf(core.slice(0, 2)) >= 0);
+    const leak = keys.indexOf(structNorm(core)) >= 0;
+    return (keep && !leak) ? structMaskNums(tok) : "▢▢";
+  });
+  return out.join(" ").replace(/▢(?:\s*▢)+/g, "▢▢").trim();
+}
+function structParse(q) {
+  const secs = []; let cur = null;
+  const newSec = (label, title) => { cur = { label: label, title: title, items: [], paras: [], rows: 0 }; secs.push(cur); };
+  String(q.ans || "").split("\n").forEach(raw => {
+    const t = raw.trim();
+    if (!t) return;
+    const h = /^\*\*(.+?)\*\*(.*)$/.exec(t);
+    if (h && h[1].length <= 48) {
+      const inner = h[1].trim();
+      const m2 = /^(\(?[\d①-⑳]+\)?\.?|[①②③④⑤⑥⑦⑧⑨⑩])\s*(.*)$/.exec(inner);
+      if (m2) newSec(m2[1].replace(/\.$/, ""), m2[2].trim()); else newSec("", inner);
+      const tail = h[2].replace(/^[\s—\-:·]+/, "").trim();
+      if (tail) cur.paras.push(tail);
+      return;
+    }
+    if (!cur) newSec("", "");
+    if (t.charAt(0) === "|") { if (!/^\|[\s:|-]+$/.test(t)) cur.rows++; return; }
+    if (t.charAt(0) === ">") { cur.paras.push(t.replace(/^>\s?/, "")); return; }
+    let m = /^(?:\*|-)\s+(.*)$/.exec(t);
+    if (m) {
+      const lab = /^([ㄱ-ㅎ])\s*[:.]\s*(.*)$/.exec(m[1]);
+      cur.items.push(lab ? [lab[1], lab[2]] : ["•", m[1]]);
+      return;
+    }
+    m = /^(\d+)\.\s+(.*)$/.exec(t);
+    if (m) { cur.items.push([m[1], m[2]]); return; }
+    cur.paras.push(t);
+  });
+  return secs;
+}
+function structSlots(items) {
+  const labs = items.map(x => x[0]);
+  if (!labs.length) return "";
+  if (labs.every(x => x === "•")) return "• × " + labs.length;
+  const GOOK = "ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ";
+  const groups = [];
+  labs.forEach(x => {
+    const g = groups[groups.length - 1];
+    if (g) {
+      const prev = g[g.length - 1];
+      if (x === "•") { g.push(x); return; }
+      if (/^\d+$/.test(prev) && /^\d+$/.test(x) && +x === +prev + 1) { g.push(x); return; }
+      if (GOOK.indexOf(prev) >= 0 && GOOK.indexOf(x) === GOOK.indexOf(prev) + 1) { g.push(x); return; }
+    }
+    groups.push([x]);
+  });
+  return groups.map(g => {
+    if (g.length === 1) return g[0];
+    if (g.every(y => /^\d+$/.test(y)) && g.length >= 3) return g[0] + "~" + g[g.length - 1];
+    return g.join("·");
+  }).join(" / ");
+}
+function structSubScores(q) {
+  const all = [];
+  const re = /\((\d+)\s*점\)/g; let m;
+  while ((m = re.exec(String(q.q || "")))) all.push(+m[1]);
+  if (all.length > 1 && q.score && all[0] === q.score) all.shift();
+  return all;
+}
+function structSkeleton(q) {
+  const qt = (q.q || "") + " " + (q.topic || "");
+  const keys = structKeys(q.ans);
+  const secs = structParse(q);
+  const scores = structSubScores(q);
+  const useScore = scores.length === secs.length && secs.length > 1;
+  return secs.map((sc, i) => {
+    let title = sc.title ? structMaskTitle(sc.title, qt, keys) : "";
+    if (!/[0-9A-Za-z가-힣]/.test(title)) title = "";
+    const head = [sc.label, title].filter(Boolean).join(" ");
+    const bits = [];
+    const sl = structSlots(sc.items);
+    if (sl) bits.push(sl);
+    if (sc.rows) bits.push("표 " + sc.rows + "행");
+    if (sc.paras.length && !sc.items.length) bits.push("서술 " + Math.min(sc.paras.length, 9) + "문단");
+    if (useScore && scores[i]) bits.push(scores[i] + "점");
+    return { head: head, note: bits.join(" · ") };
+  }).filter(s => s.head || s.note);
+}
+function structBasis(exp) {
+  const out = [];
+  if (!exp) return out;
+  const lines = String(exp).split("\n");
+  let idx = -1;
+  lines.forEach((l, i) => { if (/^[*\s]*근거/.test(l) || l.replace(/[*\s]/g, "") === "근거") idx = i; });
+  const scope = idx >= 0 ? lines.slice(idx + 1) : lines;
+  const RE_STD = /(NFTC|NFPC|NFSC|NFPA|KFI|KFS)\s*\d{2,4}[A-Z]?(?:\s*(?:표|별표)\s*[\d.]+)?(?:\s*제?\s*[\d.]+(?:\s*호)?)?/g;
+  const push = v => {
+    v = String(v).replace(/\s+/g, " ").replace(/^[\s\-–—·*]+/, "").replace(/[\s.]+$/, "");
+    if (v.length >= 4 && out.indexOf(v) < 0) out.push(v);
+  };
+  scope.forEach(ln => {
+    const t = ln.replace(/^\s*[*>·-]\s*/, "").trim();
+    if (!t) return;
+    const left = t.split(/[:：]/)[0].trim();
+    let m; RE_STD.lastIndex = 0;
+    while ((m = RE_STD.exec(t))) push(m[0]);
+    if (/^(NFTC|NFPC|NFSC|NFPA|KFI|KFS|소방시설법|화재예방법|시행령|시행규칙|법률|고시|규칙|별표|건축물)/.test(left) &&
+        /조|별표|고시|법|규칙/.test(left) && left.length <= 44) push(left);
+  });
+  return out.slice(0, 4);
+}
+function structFlow(T) {
+  return T.steps.map((s, i) => `<span class="st-step"><i>${i + 1}</i>${esc(s)}</span>`).join(`<span class="st-arrow">→</span>`);
+}
+function structBody(q, compact) {
+  const T = STRUCT_TYPES[structType(q)];
+  const secs = structSkeleton(q);
+  const keys = structKeys(q.ans || "");
+  const basis = structBasis(q.exp || "");
+  return `<div class="st-head">
+      <span class="st-type ${T.cls}">${T.icon} ${T.label}</span>
+      ${q.score ? `<span class="st-score">배점 ${q.score}점</span>` : ""}
+      <span class="st-score">정답 미포함 · 구조만</span>
+    </div>
+    <div class="st-block">
+      <div class="st-h">📑 답안 목차 뼈대 <span class="st-h-sub">문항이 요구한 칸 수</span></div>
+      <ul class="st-secs">${secs.map(s => `<li><b class="st-no">${esc(s.head || "본문")}</b>${s.note ? `<span class="st-note">${esc(s.note)}</span>` : ""}</li>`).join("")}</ul>
+    </div>
+    <div class="st-block">
+      <div class="st-h">🎯 채점 포인트</div>
+      <div class="st-kw">✅ 핵심 키워드 약 <b>${keys.length}개</b> 포함 권장</div>
+      <div class="st-kw">📎 근거 조항 힌트: ${basis.length
+        ? basis.map(b => `<span class="st-basis">${esc(b)}</span>`).join("")
+        : `<span class="st-none">조항 표기 없는 물음 — 원리·계산 위주로 서술</span>`}</div>
+    </div>
+    ${compact ? "" : `<div class="st-block">
+      <div class="st-h">${T.icon} ${T.label} 만능 틀</div>
+      <div class="st-flow">${structFlow(T)}</div>
+    </div>
+    <p class="st-hint">🧠 뼈대만 보고 칸마다 들어갈 키워드를 먼저 떠올린 뒤 <b>📖 모범답안</b>으로 확인하세요.</p>`}`;
+}
+function structItemHtml(it) {
+  return it.subs.map((s, k) => `<div class="st-sub${k ? " sep" : ""}">
+      <div class="st-sub-h">물음 ${s.sub || (k + 1)}${s.score ? " · " + s.score + "점" : ""}</div>
+      ${structBody(s, true)}
+    </div>`).join("");
+}
+function essayGuideHtml() {
+  const cards = STRUCT_GUIDE_ORDER.map(k => {
+    const T = STRUCT_TYPES[k];
+    return `<div class="g-card ${T.cls}">
+        <div class="g-card-h">${T.icon} ${T.label}</div>
+        <div class="st-flow">${structFlow(T)}</div>
+        <ul class="g-tips">${T.tips.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      </div>`;
+  }).join("");
+  return `<div class="guide-wrap">
+    <button type="button" class="guide-toggle ${guideOpen ? "open" : ""}" id="guide-btn" onclick="toggleEssayGuide()" aria-expanded="${guideOpen ? "true" : "false"}">
+      <span class="g-ico" aria-hidden="true">🧭</span><span>2차 서술형 4대 유형 답안 틀 가이드</span><span class="g-sub">만능 목차 · 채점 팁</span><span class="g-arrow" aria-hidden="true">▾</span>
+    </button>
+    <div class="guide-body ${guideOpen ? "show" : ""}" id="guide-body">
+      ${cards}
+      <p class="g-foot">문항 카드의 <b>🧭 서술 틀</b>을 누르면 그 문제만의 목차 뼈대와 근거 힌트가 열립니다. 정답은 가려 두었으니 뼈대에 키워드를 먼저 채워 보세요.</p>
+    </div>
+  </div>`;
+}
+let guideOpen = false;
+function toggleEssayGuide() {
+  guideOpen = !guideOpen;
+  const body = document.getElementById("guide-body"), btn = document.getElementById("guide-btn");
+  if (body) body.classList.toggle("show", guideOpen);
+  if (btn) { btn.classList.toggle("open", guideOpen); btn.setAttribute("aria-expanded", guideOpen ? "true" : "false"); }
+}
+const structOpen = {}, examStructOpen = {};
+function toggleEssayStruct(id) {
+  const box = document.getElementById("st-" + id);
+  if (!box) return;
+  const open = !box.classList.contains("show");
+  if (open && !box.getAttribute("data-filled")) {
+    const q = ESSAY_QM[id];
+    if (q) { box.innerHTML = structBody(q); box.setAttribute("data-filled", "1"); }
+  }
+  box.classList.toggle("show", open);
+  structOpen[id] = open;
+  const b = document.getElementById("sb-" + id);
+  if (b) {
+    b.classList.toggle("on", open);
+    b.textContent = open ? "🧭 서술 틀 접기" : "🧭 서술 틀";
+    b.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+}
+function toggleExamStruct(i) {
+  const box = document.getElementById("est-" + i);
+  if (!box) return;
+  const open = !box.classList.contains("show");
+  if (open && !box.getAttribute("data-filled")) {
+    const it = examSet[i];
+    if (it) { box.innerHTML = structItemHtml(it); box.setAttribute("data-filled", "1"); }
+  }
+  box.classList.toggle("show", open);
+  examStructOpen[i] = open;
+  const b = document.getElementById("esb-" + i);
+  if (b) {
+    b.classList.toggle("on", open);
+    b.textContent = open ? "🧭 서술 틀 접기" : "🧭 서술 틀";
+    b.setAttribute("aria-expanded", open ? "true" : "false");
+  }
 }
 
 /* ---- 가벼운 마크다운 → HTML (굵게·목록·표·인용·그림 / blank면 키워드·수치를 빈칸으로) ---- */
@@ -661,27 +1016,30 @@ function renderEssay() {
   sbar.innerHTML = tabs.map(s => `<button class="tab ${s === essaySubj ? "active" : ""}" onclick="setEssaySubj('${s}')">${s}</button>`).join("");
   const list = essayPool();
   if (!list.length) {
-    app.innerHTML = modeBar + `<div class="card">해당하는 2차 기출 물음이 없습니다.${essaySubj === ESSAY_BOOKMARK ? " ★ 헷갈림으로 표시한 물음이 아직 없습니다." : ""}</div>`;
+    app.innerHTML = modeBar + essayGuideHtml() + `<div class="card">해당하는 2차 기출 물음이 없습니다.${essaySubj === ESSAY_BOOKMARK ? " ★ 헷갈림으로 표시한 물음이 아직 없습니다." : ""}</div>`;
     return;
   }
   const pages = Math.ceil(list.length / PAGE_SIZE);
   if (essayPage >= pages) essayPage = pages - 1;
   const view = list.slice(essayPage * PAGE_SIZE, (essayPage + 1) * PAGE_SIZE);
-  app.innerHTML = modeBar + essayPager(list.length) + view.map(q => {
+  app.innerHTML = modeBar + essayGuideHtml() + essayPager(list.length) + view.map(q => {
     const done = !!state.essayDone[q.id];
     const star = !!state.essayStars[q.id];
     const open = !!essayOpen[q.id];
+    const sopen = !!structOpen[q.id];
     const blankOn = essayBlank && open;
     const noLabel = q.sub > 1 ? `${q.no}번 물음 ${q.sub}` : `${q.no}번`;
     return `<div class="card" id="ec-${q.id}">
       <div class="card-top">
         <span class="badge">${q.subject} · ${q.year} ${noLabel}</span>
         <div class="card-tools">
+          <button type="button" class="struct-btn ${sopen ? "on" : ""}" id="sb-${q.id}" onclick="toggleEssayStruct(${q.id})" aria-expanded="${sopen ? "true" : "false"}">${sopen ? "🧭 서술 틀 접기" : "🧭 서술 틀"}</button>
           <button class="exp-btn ${open ? "on" : ""}" id="eb-${q.id}" onclick="toggleEssayAns(${q.id})" aria-expanded="${open ? "true" : "false"}">${open ? "📖 모범답안 접기" : "📖 모범답안"}</button>
         </div>
       </div>
       ${q.topic ? `<div class="essay-sub">${esc(q.topic)}${q.score ? ` · ${q.score}점` : ""}</div>` : ""}
       <div class="q-title md-body essay-q">${mdHtml(q.q)}</div>
+      <div class="struct-box ${sopen ? "show" : ""}" id="st-${q.id}">${sopen ? structBody(q) : ""}</div>
       <div class="essay-ans ${open ? "show" : ""}" id="ea-${q.id}">
         <h5>📖 모범답안 · 풀이${essayBlank ? ` <button type="button" class="blank-all-btn" onclick="blankAll(this)">👁 전체 빈칸 보기</button>` : ""}</h5>
         <div class="md-body">${mdHtml(q.ans, blankOn)}</div>
