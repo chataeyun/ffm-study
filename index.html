@@ -336,7 +336,7 @@ function mdCells(row) {
   return row.replace(/^\s*\|/, "").replace(/\|\s*$/, "").split("|").map(c => c.trim());
 }
 function mdHtml(src) {
-  const lines = String(src || "").split("\n");
+  const lines = String(src || "").split("\n").map(l => /^>\s*\|/.test(l) ? l.replace(/^>\s*/, "") : l);
   const out = [];
   let para = [];
   const flush = () => { if (para.length) { out.push("<p>" + para.map(mdInline).join("<br>") + "</p>"); para = []; } };
