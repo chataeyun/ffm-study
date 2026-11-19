@@ -433,6 +433,7 @@ function toggleExplain(id) {
   const ex = card.querySelector(".explain");
   const btn = card.querySelector(".exp-btn");
   if (ex) ex.classList.toggle("show", open);
+  if (open && ex) applyTerms(ex);
   if (btn) { btn.classList.toggle("on", open); btn.textContent = open ? "📖 해설 접기" : "📖 해설"; btn.setAttribute("aria-expanded", open ? "true" : "false"); }
   if (!has) card.querySelectorAll(".choice").forEach((el, i) => el.classList.toggle("correct", open && i === q.ans));
 }
@@ -925,6 +926,7 @@ function toggleEssayGuide() {
   guideOpen = !guideOpen;
   const body = document.getElementById("guide-body"), btn = document.getElementById("guide-btn");
   if (body) body.classList.toggle("show", guideOpen);
+  if (guideOpen && body) applyTerms(body);
   if (btn) { btn.classList.toggle("open", guideOpen); btn.setAttribute("aria-expanded", guideOpen ? "true" : "false"); }
 }
 const structOpen = {}, examStructOpen = {};
