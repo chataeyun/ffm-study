@@ -497,7 +497,8 @@ function toggleEssayAns(id) {
     }
   }
   const b = document.getElementById("eb-" + id);
-  if (b) { b.classList.toggle("on", open); b.textContent = open ? "📖 모범답안 접기" : "📖 모범답안"; b.setAttribute("aria-expanded", open ? "true" : "false"); }
+    if (b) { b.classList.toggle("on", open); b.textContent = open ? "📖 모범답안 접기" : "📖 모범답안"; b.setAttribute("aria-expanded", open ? "true" : "false"); }
+  if (open) applyTerms(box);
 }
 
 /* ===== 🔲 빈칸 암기 모드 (모범답안의 핵심 키워드·수치를 가림) ===== */
@@ -943,6 +944,7 @@ function toggleEssayStruct(id) {
     b.textContent = open ? "🧭 서술 틀 접기" : "🧭 서술 틀";
     b.setAttribute("aria-expanded", open ? "true" : "false");
   }
+  if (open) applyTerms(box);
 }
 function toggleExamStruct(i) {
   const box = document.getElementById("est-" + i);
@@ -960,6 +962,7 @@ function toggleExamStruct(i) {
     b.textContent = open ? "🧭 서술 틀 접기" : "🧭 서술 틀";
     b.setAttribute("aria-expanded", open ? "true" : "false");
   }
+  if (open) applyTerms(box);
 }
 
 /* ---- 가벼운 마크다운 → HTML (굵게·목록·표·인용·그림 / blank면 키워드·수치를 빈칸으로) ---- */
@@ -1184,11 +1187,11 @@ function termWrapNode(node, seen) {
   node.parentNode.replaceChild(frag, node);
 }
 
-function applyTerms() {
-  const app = document.getElementById("app");
-  if (!app || !termOn) return;
-  if (app.querySelector(".term-hl")) return;   // 이미 처리된 화면은 건너뛴다
-  const walker = document.createTreeWalker(app, NodeFilter.SHOW_TEXT, {
+function applyTerms(root) {
+  const scope = root || document.getElementById("app");
+  if (!scope || !termOn) return;
+  if (!root && scope.querySelector(".term-hl")) return;   // 이미 처리된 화면은 건너뛴다
+  const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT, {
     acceptNode(n) {
       const v = n.nodeValue;
       if (!v || v.trim().length < 2) return NodeFilter.FILTER_REJECT;
